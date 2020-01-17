@@ -36,10 +36,10 @@ function TextInput(props) {
 
   return <div className="textbox">
     <div className="text-input-wrap">
-      {/*       <input value={text} className="text-input"
+      <input value={text} className="text-input"
         placeholder="write your message here..."
-        onChange={e => setText(target.value)}
-      /> */}
+      // onChange={e => setText(target.value)}
+      />
 
       <button onClick={() => {
         props.onSend(text)
