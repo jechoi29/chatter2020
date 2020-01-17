@@ -1,38 +1,167 @@
-.App {
-  text-align: center;
+*{
+  box-sizing:border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html{
+  height:100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body{
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: #9CECFB;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom right, #0052D4, #65C7F7, #9CECFB);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom right, #0052D4, #65C7F7, #9CECFB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color:black;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+header{
+   position:absolute;
+   top:0;
+   left:0;
+   width:100%;
+   height:35px;
+   border-bottom:1px solid white;
+   color:white;
+   padding:5px 10px 5px 10px;
+   background:rgba(0,0,10,0.3); /* opacity */
+   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+
+   display:flex;
+   align-items:center;
+ }
+
+ header img{
+   height:25px;
+   margin-right:10px;
+ }
+
+.textbox{
+  position:absolute;
+   bottom:0px;
+   left:0px;
+   width:100%;
+   height:35px;
+   border-top: 1px solid white;
+   padding:20px;
+   background:rgba(0,0,10,0.2); /* opacity */
 }
 
-.App-link {
-  color: #61dafb;
+ .text-input-wrap{
+   position:absolute;
+   top: 5px;
+   left:15px;
+   width: 90%;
+   height:45px;
+ }
+
+ .text-input{
+   width:100%;
+   border-radius:15px;
+   padding:12px 10px;
+   left:5px;
+   top:5px;
+   height:24px;
+ }
+
+.text-input:focus{
+  border:1px solid gray;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.button:hover{
+  background:#1d59a0;
+  color:white;
+}
+
+.button:focus{
+  outline:none;
+  border:2px solid white;
+}
+
+.button{
+  cursor:pointer;
+  position: absolute;
+  right:10px;
+  bottom:12px;
+  height:36px;
+  border-radius:20px;
+  background:#3992e7;
+  color:white;
+  transform:rotate(-90deg);
+  padding: 0px;
+  width:9%;
+}
+
+.received-msg{
+  position:absolute;
+  bottom:90px;
+  left:10px;
+  width:100%;
+}
+.received-msg-inbox{
+  width:28%;
+  position:absolute;
+  bottom:0px;
+  left:9px;
+}
+
+.received-msg-inbox p{
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size:14px;
+  background:#9CECFB none repeat scroll 0 0;
+  border-radius:20px;
+  margin:0px;
+  padding:5px 10px 5px 15px;
+}
+
+.arrow-left {
+  position:absolute;
+  bottom:2px;
+  left:2px;
+  width: 0px; 
+  height: 0px; 
+  border-top: 10px solid transparent;
+  border-bottom: 2px solid transparent; 
+  border-right:11px solid #9CECFB;
+  transform:rotate(-10deg);
+}
+
+.arrow-right {
+  position:absolute;
+  bottom:3px;
+  left:95px;
+  width: 0px; 
+  height: 0px; 
+  border-top: 10px solid transparent;
+  border-bottom: 2px solid transparent; 
+  border-right:11px solid #1d71dd;
+  transform:rotate(90deg);
+}
+
+
+.sending-msg{
+  position:absolute;
+  bottom:50px;
+  left:175px;
+  width:100%;
+}
+.sending-msg-inbox{
+  width:30%;
+  position:absolute;
+  bottom:0px;
+  left:9px;
+}
+
+.sending-msg-inbox p{
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size:14px;
+  color:white;
+  background:#1d71dd none repeat scroll 0 0;
+  border-radius:20px;
+  margin:0px;
+  padding:5px 0px 5px 15px;
 }
