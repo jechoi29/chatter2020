@@ -1,53 +1,63 @@
-import React, { useState } from 'react';
-import './App.css';
+import React, { useState } from 'react'
+import './App.css'
 
 function App() {
+  {/* store messages into an empty array */ }
+  const [messages, setMessages] = useState([])
+
+  // check how messages are shown
+  console.log(messages)
+
   return <main>
 
     <header>
-      <img classname="logo"
+      <img className="logo"
         alt="logo"
         src="https://cdn2.iconfinder.com/data/icons/ios7-inspired-mac-icon-set/1024/messages_5122x.png"
       />
       Chatter
   </header>
 
-    <div class="received-msg">
-      <div class="arrow-left"></div>
-      <div class="received-msg-inbox">
-        <p>Hi, Jung!!</p>
-      </div>
+    {/* show text messages */}
+    <div className="messages">
+      {messages.map((m, i) => {
+        return <div key={i} className="message-wrap">
+          <div className="message">{m}</div>
+        </div>
+      })}
     </div>
 
-    <div class="sending-msg">
-      <div class="arrow-right"></div>
-      <div class="sending-msg-inbox">
-        <p>Hi, You!!❤️</p>
-      </div>
-    </div>
-
-    <TextInput onSend={m => console.log(m)} />
+    <TextInput onSend={(text) => {
+      // new messages at the beginning of the array
+      setMessages([text, ...messages])
+    }} />
 
   </main>
 }
 
 function TextInput(props) {
-  const [text, setText] = useState('')
+  var [text, setText] = useState('')
 
+  // js comment
   return <div className="textbox">
-    <div className="text-input-wrap">
-      <input value={text} className="text-input"
-        placeholder="write your message here..."
-      // onChange={e => setText(target.value)}
-      />
-
-      <button onClick={() => {
-        props.onSend(text)
-        setText('')
-      }} className="button">
-        →
+    <input value={text}
+      className="textbox-input"
+      placeholder="write your message here..."
+      onChange={e => setText(e.target.value)}
+      onKeyPress={e => {
+        if (e.key === 'Enter') {
+          if (text) props.onSend(text)
+          setText('')
+        }
+      }}
+    />
+    <button onClick={() => {
+      if (text) props.onSend(text)
+      setText('')
+    }} className="button"
+      disabled={!text}>
+      SEND
     </button>
-    </div>
   </div>
 }
 

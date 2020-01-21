@@ -2,11 +2,13 @@
   box-sizing:border-box;
 }
 
-html{
+html, body {
   height:100%;
+  position:fixed;
+  top:0;left:0;bottom:0;right:0;
 }
 
-body{
+body {
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   height:100%;
   display:flex;
@@ -18,15 +20,15 @@ body{
   color:black;
 }
 
-header{
+header {
    position:absolute;
    top:0;
    left:0;
    width:100%;
-   height:35px;
+   height:48px;
    border-bottom:1px solid white;
    color:white;
-   padding:5px 10px 5px 10px;
+   padding:0px 10px;
    background:rgba(0,0,10,0.3); /* opacity */
    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 
@@ -34,40 +36,32 @@ header{
    align-items:center;
  }
 
- header img{
-   height:25px;
-   margin-right:10px;
- }
+ .logo {
+  height:25px;
+  margin-right:10px;
+}
 
 .textbox{
   position:absolute;
    bottom:0px;
    left:0px;
    width:100%;
-   height:35px;
+   height:48px;
    border-top: 1px solid white;
-   padding:20px;
    background:rgba(0,0,10,0.2); /* opacity */
 }
 
- .text-input-wrap{
-   position:absolute;
-   top: 5px;
-   left:15px;
-   width: 90%;
-   height:45px;
- }
-
- .text-input{
+ .textbox-input{
    width:100%;
    border-radius:15px;
-   padding:12px 10px;
-   left:5px;
-   top:5px;
-   height:24px;
+   padding:0px 5px;
+   position:absolute;
+   left:4px;
+   top:4px;
+   height:32px;
  }
 
-.text-input:focus{
+.textbox-input:focus{
   border:1px solid gray;
 }
 
@@ -79,89 +73,45 @@ header{
 
 .button:focus{
   outline:none;
-  border:2px solid white;
+  border:2px solid blue;
+}
+
+.button:disabled{
+  color:white;
+  background:gray;
 }
 
 .button{
   cursor:pointer;
   position: absolute;
-  right:10px;
-  bottom:12px;
-  height:36px;
-  border-radius:20px;
-  background:#3992e7;
-  color:white;
-  transform:rotate(-90deg);
-  padding: 0px;
-  width:9%;
+  right:4px;
+  top:8px;
+  height:24px;
+  border-radius:15px;
 }
 
-.received-msg{
-  position:absolute;
-  bottom:90px;
-  left:10px;
+.messages{
+  height:calc(100vh - 96px);
+  width:100vw;
+  position: absolute;
+  top:48px;
+  left:0px;
+  
+  display:flex;
+  flex-direction: column-reverse;
+  overflow-y:scroll;
+}
+
+.message{
+  color:white;
+  background:black;
+  margin:5px;
+  border-radius:5px;
+  padding:3px 6px;
+  display: inline-block;
+}
+
+.message-wrap {
   width:100%;
 }
-.received-msg-inbox{
-  width:28%;
-  position:absolute;
-  bottom:0px;
-  left:9px;
-}
 
-.received-msg-inbox p{
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size:14px;
-  background:#9CECFB none repeat scroll 0 0;
-  border-radius:20px;
-  margin:0px;
-  padding:5px 10px 5px 15px;
-}
-
-.arrow-left {
-  position:absolute;
-  bottom:2px;
-  left:2px;
-  width: 0px; 
-  height: 0px; 
-  border-top: 10px solid transparent;
-  border-bottom: 2px solid transparent; 
-  border-right:11px solid #9CECFB;
-  transform:rotate(-10deg);
-}
-
-.arrow-right {
-  position:absolute;
-  bottom:3px;
-  left:95px;
-  width: 0px; 
-  height: 0px; 
-  border-top: 10px solid transparent;
-  border-bottom: 2px solid transparent; 
-  border-right:11px solid #1d71dd;
-  transform:rotate(90deg);
-}
-
-
-.sending-msg{
-  position:absolute;
-  bottom:50px;
-  left:175px;
-  width:100%;
-}
-.sending-msg-inbox{
-  width:30%;
-  position:absolute;
-  bottom:0px;
-  left:9px;
-}
-
-.sending-msg-inbox p{
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size:14px;
-  color:white;
-  background:#1d71dd none repeat scroll 0 0;
-  border-radius:20px;
-  margin:0px;
-  padding:5px 0px 5px 15px;
-}
