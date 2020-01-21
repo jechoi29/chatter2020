@@ -17,6 +17,7 @@ body {
   background: #9CECFB;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to bottom right, #0052D4, #65C7F7, #9CECFB);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to bottom right, #0052D4, #65C7F7, #9CECFB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+   /* background:linear-gradient(145deg, #0052D4, #65C7F7, #9CECFB) */
   color:black;
 }
 
@@ -54,10 +55,9 @@ header {
  .textbox-input{
    width:100%;
    border-radius:15px;
-   padding:0px 5px;
+   padding:0px 15px;
    position:absolute;
-   left:4px;
-   top:4px;
+   top:7px;
    height:32px;
  }
 
@@ -78,14 +78,14 @@ header {
 
 .button:disabled{
   color:white;
-  background:gray;
+  background:#66a8be;
 }
 
 .button{
   cursor:pointer;
   position: absolute;
-  right:4px;
-  top:8px;
+  right:5px;
+  top:10px;
   height:24px;
   border-radius:15px;
 }
@@ -94,8 +94,8 @@ header {
   height:calc(100vh - 96px);
   width:100vw;
   position: absolute;
-  top:48px;
-  left:0px;
+  top:40px;
+  left:10px;
   
   display:flex;
   flex-direction: column-reverse;
@@ -103,11 +103,11 @@ header {
 }
 
 .message{
-  color:white;
-  background:black;
+  color:#215994;
+  background:white;
   margin:5px;
-  border-radius:5px;
-  padding:3px 6px;
+  border-radius:10px;
+  padding:3px 9px;
   display: inline-block;
 }
 

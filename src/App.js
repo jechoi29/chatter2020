@@ -44,6 +44,7 @@ function TextInput(props) {
       className="textbox-input"
       placeholder="write your message here..."
       onChange={e => setText(e.target.value)}
+      // in the textbox, pressed the enter key, then sent message
       onKeyPress={e => {
         if (e.key === 'Enter') {
           if (text) props.onSend(text)
