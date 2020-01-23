@@ -6,10 +6,10 @@ let db;
 const collection = "messages";
 
 firebase.initializeApp({
-  apiKey: "AIzaSyDe5hejNin_uspcktTCkhfQAhbWMIARuy0",
-  authDomain: "chatterrrrrrr.firebaseapp.com",
-  projectId: "chatterrrrrrr",
-  storageBucket: "chatterrrrrrr.appspot.com"
+  apiKey: "AIzaSyBqKsMxM_BcrR4MOfW9py6X3cNYHN2imQE",
+  authDomain: "jechoi29-chatter.firebaseapp.com",
+  projectId: "cjechoi29-chatter",
+  storageBucket: "jechoi29-chatter.appspot.com"
 });
 db = firebase.firestore();
 

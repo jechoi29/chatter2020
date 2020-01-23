@@ -6,7 +6,7 @@ import { db } from "./db";
 function App() {
   // store messages into an empty array
   const [messages, setMessages] = useState([]);
-  const [name, setName] = useState("Jung");
+  const [name, setName] = useState("");
 
   useEffect(() => {
     db.listen({
@@ -36,6 +36,7 @@ function App() {
         {messages.map((m, i) => {
           return (
             <div key={i} className="message-wrap">
+              <div className="username">{name}</div>
               <div className="message">{m.text}</div>
             </div>
           );

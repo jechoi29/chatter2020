@@ -165,3 +165,11 @@ header {
 .name-button:hover {
   background: rgba(255, 255, 255, 0.1);
 }
+
+.username {
+  font-size: 10px;
+  position: relative;
+  left: 5px;
+  top: 1px;
+  color: #193b5f;
+}
