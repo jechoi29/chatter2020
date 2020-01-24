@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import NamePicker from "./namePicker.js";
-import { db } from "./db";
+import { db, useDB } from "./db";
+import NamePicker from "./namePicker";
+import { BrowserRouter, Route } from "react-router-dom";
 
 function App() {
-  // store messages into an empty array
-  const [messages, setMessages] = useState([]);
-  const [name, setName] = useState("");
-
   useEffect(() => {
-    db.listen({
-      receive: m => setMessages(current => [m, ...current])
-    });
+    const { pathname } = window.location;
+    if (pathname.length < 2) window.location.pathname = "home";
   }, []);
+  return (
+    <BrowserRouter>
+      <Route path="/:room" component={Room} />
+    </BrowserRouter>
+  );
+}
 
-  // check how messages are shown
-  console.log(messages);
+function Room(props) {
+  const { room } = props.match.params;
+  const [name, setName] = useState("");
+  const messages = useDB(room);
 
   return (
     <main>
@@ -31,13 +35,18 @@ function App() {
         <NamePicker onSave={setName} />
       </header>
 
-      {/* show text messages */}
       <div className="messages">
         {messages.map((m, i) => {
           return (
-            <div key={i} className="message-wrap">
-              <div className="username">{name}</div>
-              <div className="message">{m.text}</div>
+            <div
+              key={i}
+              className="message-wrap"
+              from={m.name === name ? "me" : "you"}
+            >
+              <div className="message">
+                <div className="msg-name">{m.name}</div>
+                <div className="msg-text">{m.text}</div>
+              </div>
             </div>
           );
         })}
@@ -48,7 +57,8 @@ function App() {
           db.send({
             text,
             name,
-            ts: new Date()
+            ts: new Date(),
+            room
           });
         }}
       />
@@ -58,16 +68,14 @@ function App() {
 
 function TextInput(props) {
   var [text, setText] = useState("");
-
-  // js comment
+  // normal js comment
   return (
-    <div className="textbox">
+    <div className="text-input-wrap">
       <input
         value={text}
-        className="textbox-input"
-        placeholder="write your message here..."
+        className="text-input"
+        placeholder="write your message"
         onChange={e => setText(e.target.value)}
-        // in the textbox, pressed the enter key, then sent message
         onKeyPress={e => {
           if (e.key === "Enter") {
             if (text) props.onSend(text);
