@@ -77,11 +77,12 @@ header {
   font-size: 13px;
   padding: 0px 10px;
   position: absolute;
-  left: 4px;
+  left: 45px;
   top: 8px;
   height: 32px;
   outline: none;
-  width: calc(100% - 8px);
+  /* width: calc(100% - 8px); */
+  width: calc(100% - 50px);
 }
 
 .text-input:focus {

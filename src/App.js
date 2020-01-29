@@ -3,6 +3,10 @@ import "./App.css";
 import { db, useDB } from "./db";
 import NamePicker from "./namePicker";
 import { BrowserRouter, Route } from "react-router-dom";
+import Camera from "react-snap-pic";
+import { FiSend, FiCamera } from "react-icons/fi";
+import * as firebase from "firebase/app";
+import "firebase/storage";
 
 function App() {
   useEffect(() => {
@@ -21,8 +25,28 @@ function Room(props) {
   const [name, setName] = useState("");
   const messages = useDB(room);
 
+  const [showCamera, setShowCamera] = useState(false);
+
+  async function takePicture(img) {
+    setShowCamera(false);
+    const imgID = Math.random()
+      .toString(36)
+      .substring(7);
+    var storageRef = firebase.storage().ref();
+    var ref = storageRef.child(imgID + ".jpg");
+    await ref.putString(img, "data_url");
+    db.send({
+      img: imgID,
+      name,
+      ts: new Date(),
+      room
+    });
+  }
+
   return (
     <main>
+      {showCamera && <Camera takePicture={takePicture} />}
+
       <header>
         <div className="logo-wrap">
           <img
@@ -36,23 +60,13 @@ function Room(props) {
       </header>
 
       <div className="messages">
-        {messages.map((m, i) => {
-          return (
-            <div
-              key={i}
-              className="message-wrap"
-              from={m.name === name ? "me" : "you"}
-            >
-              <div className="message">
-                <div className="msg-name">{m.name}</div>
-                <div className="msg-text">{m.text}</div>
-              </div>
-            </div>
-          );
-        })}
+        {messages.map((m, i) => (
+          <Message key={i} m={m} name={name} />
+        ))}
       </div>
 
       <TextInput
+        showCamera={() => setShowCamera(true)}
         onSend={text => {
           db.send({
             text,
@@ -66,11 +80,36 @@ function Room(props) {
   );
 }
 
+const bucket =
+  "https://firebasestorage.googleapis.com/v0/b/jechoi29-chatter.appspot.com/o/";
+const suffix = ".jpg?alt=media";
+
+function Message({ m, name }) {
+  return (
+    <div className="message-wrap" from={m.name === name ? "me" : "you"}>
+      <div className="message">
+        <div className="msg-name">{m.name}</div>
+        <div className="msg-text">
+          {m.text}
+          {m.img && <img src={bucket + m.img + suffix} alt="pic" />}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function TextInput(props) {
   var [text, setText] = useState("");
+
   // normal js comment
   return (
     <div className="text-input-wrap">
+      <button
+        onClick={props.showCamera}
+        style={{ position: "absolute", left: 7, top: 12 }}
+      >
+        <FiCamera style={{ height: 17, width: 17 }} />
+      </button>
       <input
         value={text}
         className="text-input"
