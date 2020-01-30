@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import "./media.css";
 import { db, useDB } from "./db";
 import NamePicker from "./namePicker";
 import { BrowserRouter, Route } from "react-router-dom";
 import Camera from "react-snap-pic";
-import { FiSend, FiCamera } from "react-icons/fi";
+import { FiCamera } from "react-icons/fi";
 import * as firebase from "firebase/app";
 import "firebase/storage";
+import Div100vh from "react-div-100vh";
 
 function App() {
   useEffect(() => {
@@ -34,8 +36,9 @@ function Room(props) {
       .substring(7);
     var storageRef = firebase.storage().ref();
     var ref = storageRef.child(imgID + ".jpg");
-    await ref.putString(img, "data_url");
+    await ref.putString(img, "data_url"); // uploading the image to storage
     db.send({
+      //witin that database send these messages
       img: imgID,
       name,
       ts: new Date(),
@@ -44,7 +47,8 @@ function Room(props) {
   }
 
   return (
-    <main>
+    <Div100vh>
+      {/* if show camera is true, update/render the component */}
       {showCamera && <Camera takePicture={takePicture} />}
 
       <header>
@@ -58,13 +62,11 @@ function Room(props) {
         </div>
         <NamePicker onSave={setName} />
       </header>
-
       <div className="messages">
         {messages.map((m, i) => (
           <Message key={i} m={m} name={name} />
         ))}
       </div>
-
       <TextInput
         showCamera={() => setShowCamera(true)}
         onSend={text => {
@@ -76,7 +78,7 @@ function Room(props) {
           });
         }}
       />
-    </main>
+    </Div100vh>
   );
 }
 
